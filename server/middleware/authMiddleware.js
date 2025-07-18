@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
-// Middleware to verify JWT token
 const verifyToken = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
@@ -10,16 +9,14 @@ const verifyToken = async (req, res, next) => {
       return res.status(401).json({ msg: "No token provided, access denied" });
     }
 
-    const token = authHeader.substring(7); // Remove 'Bearer ' prefix
+    const token = authHeader.substring(7); 
     
     if (!token) {
       return res.status(401).json({ msg: "No token provided, access denied" });
     }
 
-    // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     
-    // Get user from token
     const user = await User.findById(decoded.id).select('-password');
     if (!user) {
       return res.status(401).json({ msg: "Token is not valid" });
@@ -39,7 +36,6 @@ const verifyToken = async (req, res, next) => {
   }
 };
 
-// Middleware to check if user is authenticated (optional)
 const optionalAuth = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
@@ -56,7 +52,6 @@ const optionalAuth = async (req, res, next) => {
     
     next();
   } catch (error) {
-    // Don't throw error for optional auth, just continue without user
     next();
   }
 };

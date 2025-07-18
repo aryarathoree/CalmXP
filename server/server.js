@@ -12,9 +12,13 @@ app.get("/", (req, res) => {
   res.send("Server is running");
 });
 
-// Import and use auth routes (only once)
+// Import and use auth routes
 const authRoutes = require("./routes/auth");
 app.use("/api/auth", authRoutes);
+
+// Import and use journal routes
+const journalRoutes = require("./routes/journal");
+app.use("/api/journals", journalRoutes);
 
 // Connect DB
 mongoose.connect(process.env.MONGO_URI)

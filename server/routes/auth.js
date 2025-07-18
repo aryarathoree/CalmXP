@@ -113,6 +113,53 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ msg: "Invalid credentials" });
     }
 
+    // Helper function to calculate level from XP
+    const calculateLevel = (xp) => {
+      // Level progression: Level 1 = 0-99 XP, Level 2 = 100-199 XP, etc.
+      return Math.floor(xp / 100) + 1;
+    };
+
+    // Daily XP and Check-in Logic
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time to start of day for comparison
+    
+    let dailyXpEarned = false;
+    let isFirstCheckInToday = false;
+    
+    // Check if user hasn't checked in today
+    if (!user.lastCheckIn || user.lastCheckIn < today) {
+      console.log("Daily check-in: Adding +10 XP for user:", user.username);
+      
+      // Add daily XP
+      const oldLevel = user.level;
+      user.xp += 10;
+      user.lastCheckIn = today;
+      
+      // Calculate new level
+      const newLevel = calculateLevel(user.xp);
+      user.level = newLevel;
+      
+      // Initialize checkIns array if it doesn't exist
+      if (!user.checkIns) {
+        user.checkIns = [];
+      }
+      
+      // Add today's check-in
+      user.checkIns.push(today);
+      
+      // Save the user with updated XP and check-in
+      await user.save();
+      
+      dailyXpEarned = true;
+      isFirstCheckInToday = true;
+      console.log("Daily check-in completed. New XP total:", user.xp);
+      if (newLevel > oldLevel) {
+        console.log(`Level Up! User ${user.username} leveled up from ${oldLevel} to ${newLevel}`);
+      }
+    } else {
+      console.log("User already checked in today:", user.username);
+    }
+
     console.log("Generating token...");
     const token = jwt.sign(
       { id: user._id }, 
@@ -129,7 +176,12 @@ router.post("/login", async (req, res) => {
         email: user.email,
         xp: user.xp,
         level: user.level
-      } 
+      },
+      dailyCheckIn: {
+        earned: dailyXpEarned,
+        xpGained: dailyXpEarned ? 10 : 0,
+        isFirstToday: isFirstCheckInToday
+      }
     });
   } catch (err) {
     console.error("Login error:", err);
@@ -166,5 +218,60 @@ router.get("/verify", verifyToken, async (req, res) => {
     res.status(500).json({ msg: "Server error" });
   }
 });
+
+// GET CHECK-IN DATA FOR CURRENT MONTH (Protected route)
+router.get("/checkins", verifyToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    // Get current month start and end dates
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const startOfMonth = new Date(year, month, 1);
+    const endOfMonth = new Date(year, month + 1, 0, 23, 59, 59, 999);
+
+    // Filter check-ins for current month
+    const monthlyCheckIns = user.checkIns ? user.checkIns.filter(checkIn => {
+      const checkInDate = new Date(checkIn);
+      return checkInDate >= startOfMonth && checkInDate <= endOfMonth;
+    }) : [];
+
+    // Format check-ins as array of day numbers for easier frontend handling
+    const checkedDays = monthlyCheckIns.map(checkIn => {
+      return new Date(checkIn).getDate();
+    });
+
+    // Check if user has checked in today
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const hasCheckedInToday = user.lastCheckIn && user.lastCheckIn >= today;
+
+    res.json({
+      currentMonth: {
+        year,
+        month: month + 1, // JavaScript months are 0-indexed, so add 1
+        checkedDays,
+        totalCheckIns: checkedDays.length,
+        hasCheckedInToday
+      },
+      user: {
+        id: user._id,
+        username: user.username,
+        xp: user.xp,
+        level: user.level,
+        totalCheckIns: user.checkIns ? user.checkIns.length : 0
+      }
+    });
+  } catch (err) {
+    console.error("Check-ins error:", err);
+    res.status(500).json({ msg: "Server error" });
+  }
+});
+
+
 
 module.exports = router;

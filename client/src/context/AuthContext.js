@@ -12,15 +12,12 @@ export const AuthProvider = ({ children }) => {
     const initAuth = async () => {
       if (token) {
         try {
-          // Set default header
           axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-          
-          // Verify token with server
+        
           const response = await axios.get("/api/auth/verify");
           setUser(response.data.user);
         } catch (error) {
           console.error("Token verification failed:", error);
-          // Token is invalid, clear it
           logout();
         }
       } else {
@@ -46,13 +43,11 @@ export const AuthProvider = ({ children }) => {
     delete axios.defaults.headers.common["Authorization"];
   };
 
-  // Add axios interceptor to handle token expiration
   useEffect(() => {
     const responseInterceptor = axios.interceptors.response.use(
       (response) => response,
       (error) => {
         if (error.response?.status === 401 && token) {
-          // Token expired or invalid
           logout();
         }
         return Promise.reject(error);

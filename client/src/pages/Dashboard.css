@@ -1,0 +1,484 @@
+.dashboard {
+  min-height: 100vh;
+  background: #f8fbff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  color: #2c3e50;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 1rem;
+  color: #5a6c7d;
+}
+
+.dashboard-header {
+  background: #fff;
+  border-bottom: 1px solid #e3e8ee;
+  padding: 1.5rem 2rem 1.2rem;
+  box-shadow: 0 2px 12px rgba(44, 62, 80, 0.06);
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard-header .user-info {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.user-info h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #4a90e2 30%, #6ba3e8 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.logout-btn {
+  background: #fff;
+  color: #ef4444;
+  border: 1.5px solid #ef4444;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, border 0.18s;
+  font-size: 1rem;
+  box-shadow: 0 1px 4px rgba(239, 68, 68, 0.06);
+}
+
+.logout-btn:hover {
+  background: #ef4444;
+  color: #fff;
+  border-color: #ef4444;
+}
+
+.dashboard-content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-sizing: border-box;
+}
+
+.two-column-layout {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.dashboard-left,
+.dashboard-right {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.user-welcome {
+  margin-bottom: 1rem;
+}
+
+.user-welcome h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 0.2rem 0;
+  letter-spacing: -0.3px;
+}
+
+.user-welcome p {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin: 0;
+  font-weight: 400;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.7rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem 0.7rem;
+  border: 1px solid #e3e8ee;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card .stat-icon {
+  font-size: 1.3rem;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+.stat-content h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 0.1rem 0;
+  letter-spacing: -0.2px;
+}
+
+.stat-content p {
+  color: #6b7280;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+}
+
+.stat-progress {
+  margin-top: 0.7rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background: #e3e8ee;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 0.2rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #4a90e2;
+  border-radius: 6px;
+  transition: width 0.5s;
+}
+
+ .progress-text {
+  font-size: 0.7rem;
+   color: #6b7280;
+  font-weight: 400;
+ }
+ 
+ /* Daily Status */
+.daily-status {
+  margin: 1rem 0;
+}
+
+.status-container {
+  display: flex;
+  justify-content: center;
+}
+
+.status-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  border: 1px solid #e3e8ee;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  max-width: 350px;
+  width: 100%;
+}
+
+.status-card.completed {
+  border-left: 3px solid #10b981;
+}
+
+.status-card.pending {
+  border-left: 3px solid #f59e0b;
+}
+
+.status-icon {
+  font-size: 1.5rem;
+  min-width: 36px;
+  text-align: center;
+}
+
+.status-content h3 {
+  margin: 0 0 0.2rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.status-content p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+/* Calendar Section */
+.calendar-section {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  border: 1px solid #e3e8ee;
+}
+
+.calendar-section h2 {
+  margin: 0 0 0.7rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  text-align: center;
+}
+
+.calendar-container {
+  margin-bottom: 0.7rem;
+}
+
+.calendar-title {
+  text-align: center;
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #4a90e2;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 4px;
+}
+
+.weekday {
+  padding: 0.3rem;
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #5a6c7d;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.8rem;
+  position: relative;
+  background: #f8fbff;
+  color: #5a6c7d;
+}
+
+.calendar-day.empty {
+  background: transparent;
+}
+
+.calendar-day.today {
+  background: #e3e8ee;
+  color: #4a90e2;
+  border: 1.5px solid #b0c4de;
+  font-weight: 600;
+}
+
+.calendar-day.checked-in {
+  background: #b0c4de;
+  color: white;
+}
+
+.calendar-day.checked-in.today {
+  border: 1.5px solid #4a90e2;
+}
+
+.check-mark {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  font-size: 0.6rem;
+  background: #fff;
+  color: #4a90e2;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.calendar-legend {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  color: #5a6c7d;
+}
+
+.legend-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.legend-box.checked {
+  background: #b0c4de;
+}
+
+.legend-box.today {
+  background: #e3e8ee;
+  border: 1.5px solid #b0c4de;
+}
+
+/* Responsive Queries */
+@media (max-width: 900px) {
+  .two-column-layout {
+    flex-direction: column;
+  }
+  
+  .dashboard-content {
+    padding: 1rem;
+  }
+  }
+  
+@media (max-width: 600px) {
+  .dashboard-header {
+    padding: 0.7rem 0.3rem;
+  }
+  
+  .stat-card,
+  .calendar-section,
+  .status-card {
+    padding: 0.7rem 0.4rem;
+    font-size: 0.93rem;
+  }
+
+  .stat-card .stat-icon {
+    font-size: 1rem;
+  }
+  
+  .calendar-section h2 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .dashboard-header .user-info h1 {
+    font-size: 0.9rem;
+  }
+  
+  .stat-card,
+  .calendar-section,
+  .status-card {
+    padding: 0.5rem 0.2rem;
+    font-size: 0.85rem;
+  }
+
+  .stat-card .stat-icon {
+    font-size: 0.8rem;
+  }
+}
+
+.checkin-popup {
+  position: fixed;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(44,62,80,0.18);
+  border: 1.5px solid #e3e8ee;
+  padding: 1.3rem 2.2rem 1.3rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  z-index: 3000;
+  min-width: 270px;
+  max-width: 90vw;
+  animation: popup-fade-in 0.4s;
+}
+
+@keyframes popup-fade-in {
+  from { opacity: 0; transform: translateY(30px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+
+.checkin-popup .status-icon {
+  font-size: 2.2rem;
+  min-width: 44px;
+  color: #10b981;
+}
+
+.checkin-popup .status-content h3 {
+  margin: 0 0 0.3rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1f2937;
+  }
+  
+.checkin-popup .status-content p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.97rem;
+  line-height: 1.5;
+}
+
+.close-popup {
+  background: none;
+  border: none;
+  color: #ef4444;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 0.7rem;
+  transition: color 0.2s;
+  padding: 0 0.2rem;
+  line-height: 1;
+}
+.close-popup:hover {
+  color: #b91c1c;
+}
+
+@media (max-width: 600px) {
+  .checkin-popup {
+    right: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 0;
+    padding: 1rem 1.2rem 1rem 1rem;
+    font-size: 0.97rem;
+  }
+  .checkin-popup .status-icon {
+    font-size: 1.5rem;
+    min-width: 32px;
+  }
+}

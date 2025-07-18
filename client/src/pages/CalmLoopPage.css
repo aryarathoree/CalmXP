@@ -1,0 +1,157 @@
+/* CalmLoop Page Styles - Powder Blue & White Theme */
+
+.calm-loop-page-container {
+  min-height: 100vh;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(176, 196, 222, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(135, 206, 235, 0.1) 0%, transparent 50%),
+    linear-gradient(135deg, #fdfdfd 0%, #f0f8ff 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  color: #2c3e50;
+}
+
+.calm-loop-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #4a90e2, #87ceeb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.5px;
+}
+
+.page-header p {
+  color: #5a6c7d;
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: 300;
+}
+
+.calm-loop-main {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fbff 0%, #e3e8ee 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  box-sizing: border-box;
+  padding: 0 0 2rem 0;
+}
+
+.calm-loop-header {
+  padding: 2.5rem 2rem 1.2rem 2rem;
+  background: #fff;
+  border-bottom: 1.5px solid #e3e8ee;
+  box-shadow: 0 2px 12px rgba(44,62,80,0.06);
+  text-align: left;
+  max-width: 1200px;
+  margin: 0 auto 2.5rem auto;
+  border-radius: 0 0 18px 18px;
+}
+.calm-loop-header h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #4a90e2 30%, #6ba3e8 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -1px;
+}
+.calm-loop-desc {
+  color: #5a6c7d;
+  font-size: 1.15rem;
+  font-weight: 400;
+  margin: 0;
+  max-width: 600px;
+}
+
+.calm-loop-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1200px;
+  min-height: 500px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .calm-loop-page {
+    padding: 1rem;
+  }
+
+  .page-header h1 {
+    font-size: 2rem;
+  }
+
+  .page-header p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .calm-loop-page {
+    padding: 0.5rem;
+  }
+
+  .page-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .page-header p {
+    font-size: 0.9rem;
+  }
+} 
+
+@media (max-width: 900px) {
+  .calm-loop-header {
+    padding: 1.5rem 1rem 1rem 1rem;
+    margin-bottom: 1.2rem;
+  }
+  .calm-loop-header h1 {
+    font-size: 1.4rem;
+  }
+  .calm-loop-desc {
+    font-size: 1rem;
+  }
+  .calm-loop-content {
+    min-height: 350px;
+    padding: 0 0.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .calm-loop-header {
+    padding: 1rem 0.5rem 0.7rem 0.5rem;
+    margin-bottom: 0.7rem;
+    border-radius: 0 0 10px 10px;
+  }
+  .calm-loop-header h1 {
+    font-size: 1.1rem;
+  }
+  .calm-loop-desc {
+    font-size: 0.93rem;
+  }
+  .calm-loop-content {
+    min-height: 200px;
+    padding: 0 0.2rem;
+  }
+} 

@@ -30,46 +30,37 @@ const Login = () => {
   };
 
   return (
-    <>
-      <header className="auth-header">
-        <div className="container">
-          <Link to="/" className="logo">CalmXP</Link>
-          <nav className="auth-nav">
-            <Link to="/register">Sign Up</Link>
-          </nav>
-        </div>
-      </header>
+    <div className="auth-page">
       <div className="auth-container">
-        <h2>Welcome Back</h2>
-      <form onSubmit={handleLogin} className="auth-form">
-        <input 
-          type="email" 
-          name="email" 
-          placeholder="Email" 
-          value={form.email}
-          onChange={handleChange}
-          autoComplete="email"
-          required 
-        />
-        <input 
-          type="password" 
-          name="password" 
-          placeholder="Password" 
-          value={form.password}
-          onChange={handleChange}
-          autoComplete="current-password"
-          required 
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
-        </button>
-        {message && <p className="message">{message}</p>}
-      </form>
-        <div className="auth-links">
-          <p>Don't have an account? <Link to="/register">Sign up here</Link></p>
+        <h1 className="auth-title">Login</h1>
+        {message && <div className="auth-message">{message}</div>}
+        <form className="auth-form" onSubmit={handleLogin}>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={handleChange}
+            required
+          />
+          <button type="submit" className="auth-btn" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+        <div className="auth-footer">
+          <span>Don't have an account?</span>
+          <Link to="/register" className="auth-link">Sign Up</Link>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
