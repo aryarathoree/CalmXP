@@ -2,7 +2,3 @@
 client/build/
 client/node_modules/
 server/node_modules/
-client/package-lock.json
-server/package-lock.json
-client/package.json 
-server/package.json
